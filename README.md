@@ -1,7 +1,5 @@
-Örnek Kızartılmış Patates sitesi.
-Example Potato Restourant.
-
-
+**Örnek Kızartılmış Patates sitesi.**  
+**Example Potato Restaurant.**
 
 
 
