@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /chaivetta/
+Disallow: /api/
+Disallow: /.data/
+Disallow: /.vscode/
+Disallow: /node_modules/
+Disallow: /usage/
+
+Sitemap: https://patata.net.tr/sitemap.xml

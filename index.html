@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PATATA | Imperium Frixura — Gurme Patates Deneyimi</title>
+    <meta name="description"
+        content="Patata — Roma İmparatorluğu mirasından modern gastronomiye uzanan eşsiz bir gurme patates deneyimi. Özel soslar ve çıtır lezzetler.">
+    <meta name="keywords"
+        content="patates, gurme patates, fries, istanbul restoran, sokak lezzetleri, trüflü patates, parmesanlı patates, patata">
+    <meta name="author" content="Patata">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#121212">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://patata.com; media-src 'self'; connect-src 'self' http://localhost:5500 http://127.0.0.1:5500 http://localhost:3000 http://127.0.0.1:3000;">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://patata.com/">
+    <meta property="og:title" content="PATATA | Imperium Frixura — Gurme Patates Deneyimi">
+    <meta property="og:description"
+        content="Roma İmparatorluğu mirasından modern gastronomiye uzanan eşsiz bir patates deneyimi.">
+    <meta property="og:image" content="https://patata.com/images/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://patata.com/">
+    <meta property="twitter:title" content="PATATA | Imperium Frixura">
+    <meta property="twitter:description"
+        content="Roma İmparatorluğu mirasından modern gastronomiye uzanan eşsiz bir patates deneyimi.">
+    <meta property="twitter:image" content="https://patata.com/images/og-image.jpg">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "PATATA",
+      "image": "https://patata.com/images/og-image.jpg",
+      "@id": "https://patata.com",
+      "url": "https://patata.com",
+      "telephone": "+902120000000",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Gurme Sokak No: 1",
+        "addressLocality": "İstanbul",
+        "postalCode": "34000",
+        "addressCountry": "TR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 41.0082,
+        "longitude": 28.9784
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "11:00",
+        "closes": "23:00"
+      },
+      "servesCuisine": ["Gourmet", "Street Food", "Fries"],
+      "priceRange": "₺₺"
+    }
+    </script>
+
+    <link rel="canonical" href="https://patata.com/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@1,400;1,500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="curtain.css">
+
+</head>
+
+<body class="loading">
+    <div class="noise-overlay"></div>
+
+    <!-- Theater Curtain -->
+    <div id="curtain-container">
+        <canvas id="curtain-canvas"></canvas>
+        <div class="curtain-overlay">
+            <div class="curtain-logo">PATATA</div>
+            <div class="curtain-subtitle">EST. MMXXVI</div>
+            <button class="curtain-button" id="curtainButton">Harika Bir Deneyim İçin Tıkla</button>
+        </div>
+    </div>
+
+
+    <!-- Shopping Cart Modal -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Sepetim</h3>
+            <button class="cart-close" id="cartClose">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Items will be injected here -->
+            <div class="empty-cart-msg">Sepetiniz boş.</div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-customer">
+                <input type="text" id="customerName" placeholder="İsminiz" class="cart-input">
+                <input type="tel" id="customerPhone" placeholder="Telefon" class="cart-input">
+            </div>
+            <div class="cart-total">
+                <span>Toplam:</span>
+                <span id="cartTotalValue">₺0</span>
+            </div>
+            <button class="btn-checkout" id="checkoutBtn">Siparişi Tamamla</button>
+        </div>
+    </div>
+    <div class="cart-backdrop" id="cartBackdrop"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-outline" id="cursorOutline"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="brand">PATATA<span class="brand-dot">.</span></a>
+
+            <div class="nav-menu" id="navMenu">
+                <a href="#heritage" class="nav-link">Mirası Keşfet</a>
+                <a href="#menu" class="nav-link">Koleksiyon</a>
+                <a href="#experience" class="nav-link">Deneyim</a>
+                <a href="#reservation" class="nav-link">Rezervasyon</a>
+            </div>
+
+            <div class="nav-actions">
+                <button class="cart-trigger" id="cartTrigger">
+                    Sepet (<span id="cartCount">0</span>)
+                </button>
+                <button class="music-toggle" id="musicToggle" aria-label="Müziği Aç/Kapat">
+                    ♫
+                </button>
+                <button class="nav-toggle" id="navToggle" aria-label="Menü">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Background Music (Random) -->
+    <audio id="bgMusic" loop></audio>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-bg">
+            <video autoplay muted loop playsinline>
+                <source src="videos/Arkaplan Patates.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-label fade-up">Anno MMXXIV</div>
+            <h1 class="hero-title">
+                <span class="char-reveal" style="animation-delay: 1s">GELENEKSEL</span><br>
+                <span class="serif-italic char-reveal" style="animation-delay: 1.2s">Mükemmellik</span>
+            </h1>
+            <p class="hero-desc fade-up delay-2">
+                Roma İmpartorluğu'ndan ilham alan, modern gastronomiyle yeniden yorumlanan
+                kızartma sanatı. Sadece patates değil, bir tarih yolculuğu.
+            </p>
+        </div>
+        <div class="hero-scroll fade-up delay-3">
+            <span class="scroll-text">Keşfet</span>
+            <div class="scroll-line"></div>
+        </div>
+    </header>
+
+    <!-- Heritage / Philosophy Section -->
+    <section class="section heritage" id="heritage">
+        <div class="container grid-2">
+            <div class="heritage-text reveal-text">
+                <span class="section-label">Felsefemiz</span>
+                <h2 class="section-heading">Kızartma <span class="gold-text">Sanatı</span></h2>
+                <div class="divider-line"></div>
+                <p class="body-text">
+                    Sıradanlıktan uzak, mükemmelliğe adanmış bir tutku. Patata, basit bir kök sebzeyi
+                    alır ve onu bir imparatorluk hazinesine dönüştürür.
+                </p>
+                <p class="body-text">
+                    Roma'nın görkemli şölenlerinden, modern İtalyan mutfağının inceliğine uzanan
+                    bu yolculukta, her dilim altın değerindedir. Üç aşamalı pişirme tekniğimiz,
+                    yüzyıllık reçetelerin modern yorumudur.
+                </p>
+            </div>
+            <div class="heritage-image artwork-wrapper">
+                <video class="artwork-img" autoplay loop muted playsinline>
+                    <source src="videos/pirenses.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Collection (Menu) -->
+    <section class="section collection" id="menu">
+        <div class="container">
+            <div class="section-header center">
+                <span class="section-label">Menü</span>
+                <h2 class="section-heading">İmparatorluk <span class="serif-italic">Koleksiyonu</span></h2>
+            </div>
+
+            <div class="menu-grid">
+                <!-- Item 1 -->
+                <div class="menu-item fade-up">
+                    <div class="menu-img">
+                        <img src="images/mantar.jpg" alt="Aurum Classicum — Truffle Parmesan">
+                    </div>
+                    <div class="menu-details">
+                        <div class="menu-header">
+                            <h3>Aurum Classicum</h3>
+                            <span class="price">₺180</span>
+                        </div>
+                        <p class="menu-desc">Üçlü kızartma, trüf yağı, parmesan tozu, mantar, biberiye.</p>
+                        <button class="btn-add-cart" data-name="Aurum Classicum" data-price="180">Sepete Ekle</button>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="menu-item fade-up delay-1">
+                    <div class="menu-img">
+                        <img src="images/peynir.jpg" alt="Caesar's Feast — Loaded Wagyu">
+                    </div>
+                    <div class="menu-details">
+                        <div class="menu-header">
+                            <h3>Caesar's Feast</h3>
+                            <span class="price">₺320</span>
+                        </div>
+                        <p class="menu-desc">Wagyu parçacıkları, siyah trüf, erimiş cheddar, çıtır soğan.</p>
+                        <button class="btn-add-cart" data-name="Caesar's Feast" data-price="320">Sepete Ekle</button>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="menu-item fade-up delay-2">
+                    <div class="menu-img">
+                        <img src="images/yesillik.jpg" alt="Mare Nostrum — Mediterranean">
+                    </div>
+                    <div class="menu-details">
+                        <div class="menu-header">
+                            <h3>Mare Nostrum</h3>
+                            <span class="price">₺240</span>
+                        </div>
+                        <p class="menu-desc">Ege otları, feta peyniri, zeytin ezmesi, limon kabuğu.</p>
+                        <button class="btn-add-cart" data-name="Mare Nostrum" data-price="240">Sepete Ekle</button>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="menu-item fade-up delay-3">
+                    <div class="menu-img">
+                        <img src="images/etli.jpg" alt="Gladiator's Fire — Spicy Loaded">
+                    </div>
+                    <div class="menu-details">
+                        <div class="menu-header">
+                            <h3>Gladiator's Fire</h3>
+                            <span class="price">₺270</span>
+                        </div>
+                        <p class="menu-desc">Füme paprika, acı sos, eritilmiş peynir, jalapeño.</p>
+                        <button class="btn-add-cart" data-name="Gladiator's Fire" data-price="270">Sepete Ekle</button>
+                    </div>
+                </div>
+                <!-- Item 5 -->
+                <div class="menu-item fade-up delay-4">
+                    <div class="menu-img">
+                        <img src="images/ballı.jpg" alt="Dulcis Ignis — Sweet Potato">
+                    </div>
+                    <div class="menu-details">
+                        <div class="menu-header">
+                            <h3>Dulcis Ignis</h3>
+                            <span class="price">₺220</span>
+                        </div>
+                        <p class="menu-desc">Tatlı patates, bal-hardal, tarçın dokunuşu.</p>
+                        <button class="btn-add-cart" data-name="Dulcis Ignis" data-price="220">Sepete Ekle</button>
+                    </div>
+                </div>
+                <!-- Item 6 -->
+                <div class="menu-item fade-up delay-5">
+                    <div class="menu-img">
+                        <img src="images/sade.jpg" alt="Vulgus Classic — Sea Salt">
+                    </div>
+                    <div class="menu-details">
+                        <div class="menu-header">
+                            <h3>Vulgus (Classic)</h3>
+                            <span class="price">₺150</span>
+                        </div>
+                        <p class="menu-desc">Sade, deniz tuzu, ev yapımı mayonez.</p>
+                        <button class="btn-add-cart" data-name="Vulgus" data-price="150">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Experience Section (Editorial) -->
+    <section class="section experience dark-mode" id="experience">
+        <div class="container grid-awards">
+            <!-- 1. Awards Sidebar (New) -->
+            <div class="awards-sidebar">
+                <!-- Award 1 -->
+                <div class="award-item" style="animation-delay: 0.2s">
+                    <img src="images/çelenk.jpg.png" alt="Wreath" class="award-wreath-img">
+                    <div class="award-text-wrapper">
+                        <span class="award-score">10/10</span>
+                        <span class="award-name">TASTY</span>
+                    </div>
+                </div>
+
+                <!-- Award 2 -->
+                <div class="award-item" style="animation-delay: 0.4s">
+                    <img src="images/çelenk.jpg.png" alt="Wreath" class="award-wreath-img">
+                    <div class="award-text-wrapper">
+                        <span class="award-score">100</span>
+                        <span class="award-name">MMHHH</span>
+                    </div>
+                </div>
+
+                <!-- Award 3 -->
+                <div class="award-item" style="animation-delay: 0.6s">
+                    <img src="images/çelenk.jpg.png" alt="Wreath" class="award-wreath-img">
+                    <div class="award-text-wrapper">
+                        <span class="award-score">10/10</span>
+                        <span class="award-name">GOOD</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="experience-text reveal-text">
+                <span class="section-label">Deneyim</span>
+                <h2 class="section-heading">Ziyafet <span class="gold-text">Ritüeli</span></h2>
+                <div class="divider-line"></div>
+                <ul class="experience-list">
+                    <li>
+                        <span class="roman-num">I</span>
+                        <div class="list-content">
+                            <h4>Seçim (Selectio)</h4>
+                            <p>Sadece en iyi toprakların, en asil patatesleri seçilir.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="roman-num">II</span>
+                        <div class="list-content">
+                            <h4>Hazırlık (Praeparatio)</h4>
+                            <p>24 saatlik soğuk suda bekletme ve titiz kesim işlemi.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="roman-num">III</span>
+                        <div class="list-content">
+                            <h4>Ateş (Ignis)</h4>
+                            <p>Üç farklı ısı derecesinde, altın rengine ulaşan pişirme.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="roman-num">IV</span>
+                        <div class="list-content">
+                            <h4>Sunum (Presentatio)</h4>
+                            <p>Mermer tabaklarda, imparatorlara layık bir sunum.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="experience-image artwork-wrapper">
+                <video class="artwork-img" autoplay loop muted playsinline>
+                    <source src="videos/ciftci.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation -->
+    <section class="section reservation" id="reservation">
+        <div class="container reservation-container">
+            <div class="reservation-box fade-up">
+                <h2 class="section-heading center">Rezervasyon</h2>
+                <p class="reservation-sub center">Sınırlı sayıda masa için yerinizi ayırtın.</p>
+
+                <form class="booking-form" id="bookingForm">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder=" " required>
+                        <label for="name">İsim Soyisim</label>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="date" id="date" placeholder=" " required>
+                            <label for="date">Tarih</label>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <input type="number" id="person" placeholder=" " min="1" max="20" required>
+                                <label for="person">Kişi Sayısı</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            <span class="btn-text">Masamı Ayır</span>
+                        </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h3>PATATA.</h3>
+                <p>Est. MMXXIV Roma</p>
+            </div>
+            <div class="footer-links">
+                <a href="#heritage">Hakkımızda</a>
+                <a href="#menu">Menü</a>
+                <a href="#reservation">İletişim</a>
+            </div>
+            <div class="footer-social">
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Patata. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script src="curtain.js"></script>
+    <script src="api.js?v=2"></script>
+    <script src="script.js?v=2"></script>
+</body>
+
+</html>
